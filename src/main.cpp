@@ -7,6 +7,12 @@ int main() {
   cerr << std::unitbuf;
 
   // TODO: Uncomment the code below to pass the first stage
-  cout << "$ ";
+  bool active = true;
+  while (active) {  
+    cout << "$ ";
+    string line;
+    getline(cin, line);
+    cout<<line<<": command not found"<<endl;
+  }
   return 0;
 }
