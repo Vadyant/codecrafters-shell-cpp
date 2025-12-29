@@ -4,11 +4,11 @@ using namespace std;
 string line;
 bool active = true;
 
-void print(string line,string val){
-  if(val=="invalid"){
-    cout<<line<<": command not found"<<endl;
-  }
-}
+// void print(string line,string val){
+//   if(val=="invalid"){
+//     cout<<line<<": command not found"<<endl;
+//   }
+// }
 
 void read(){
   cout << "$ ";
@@ -16,12 +16,30 @@ void read(){
 }
 
 void eval(){
-  if(line=="exit"){
+  vector<string>word;
+  string temp="";
+
+  for(int i=0;i<line.length();i++){
+    if(line[i]==' '){
+      word.push_back(temp);
+      temp="";
+    }
+    temp+=line[i];
+  }
+  word.push_back(temp);
+  int len=word.size();
+  if(word[0]=="exit"){
     active=false;
     return;
   }
-  string v="invalid";
-  print(line,v);
+  if(word[0]=="echo"){
+    for(int i=1;i<len;i++)
+    cout<<word[i]<<' ';
+    cout<<endl;
+    return;
+  }
+  cout<<line<<": command not found"<<endl;
+  
 }
 
 int main() {
