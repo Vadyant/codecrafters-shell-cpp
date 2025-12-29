@@ -4,20 +4,20 @@ using namespace std;
 string line;
 bool active = true;
 vector<string> builtin={"echo","exit","type"};
+vector<string>word;
+int len;
+string val;
 
-// void print(string line,string val){
-//   if(val=="invalid"){
-//     cout<<line<<": command not found"<<endl;
-//   }
-// }
+void print(int a,int b){
+  for(int i=a;i<b-1;i++){
+    cout<<word[i]<<' ';
+  }
+  cout<<word[b-1]<<val<<endl;
+}
 
 void read(){
   cout << "$ ";
   getline(cin,line);
-}
-
-void eval(){
-  vector<string>word;
   string temp="";
 
   for(int i=0;i<line.length();i++){
@@ -25,20 +25,21 @@ void eval(){
       word.push_back(temp);
       temp="";
     }
-    temp+=line[i];
+    else temp+=line[i];
   }
   word.push_back(temp);
   int len=word.size();
-  
+}
+
+void eval(){
   if(word[0]=="exit"){
     active=false;
     return;
   }
   
   if(word[0]=="echo"){
-    for(int i=1;i<len;i++)
-    cout<<word[i];
-    cout<<endl;
+    val="";
+    print(1,len);
     return;
   }
   
@@ -48,9 +49,8 @@ void eval(){
       cout<<word[1]<<" is a shell builtin"<<endl;
       return;
     }
-    for(int i=1;i<len;i++)
-    cout<<word[i];
-    cout<<": not found"<<endl;
+    val=": not found";
+    print(1,len);
     return;
   }
   
