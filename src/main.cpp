@@ -24,7 +24,7 @@ void eval(){
       word.push_back(temp);
       temp="";
     }
-    temp+=line[i];
+    else temp+=line[i];
   }
   word.push_back(temp);
   int len=word.size();
