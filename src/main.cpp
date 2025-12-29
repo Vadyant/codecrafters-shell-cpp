@@ -25,7 +25,7 @@ void eval(){
       word.push_back(temp);
       temp="";
     }
-    else temp+=line[i];
+    temp+=line[i];
   }
   word.push_back(temp);
   int len=word.size();
@@ -37,7 +37,7 @@ void eval(){
   
   if(word[0]=="echo"){
     for(int i=1;i<len;i++)
-    cout<<word[i]<<' ';
+    cout<<word[i];
     cout<<endl;
     return;
   }
@@ -49,7 +49,7 @@ void eval(){
       return;
     }
     for(int i=1;i<len;i++)
-    cout<<word[i]<<' ';
+    cout<<word[i];
     cout<<": not found"<<endl;
     return;
   }
