@@ -1,8 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool invalid_command(string line){
-  cout<<line<<": command not found"<<endl;
+string line;
+
+void print(string line,string val){
+  if(val=="invalid"){
+    cout<<line<<": command not found"<<endl;
+  }
+}
+
+void read(){
+  cout << "$ ";
+  getline(cin,line);
+}
+
+void eval(){
+  print(line,"invalid");
 }
 
 int main() {
@@ -13,10 +26,8 @@ int main() {
   // TODO: Uncomment the code below to pass the first stage
   bool active = true;
   while (active) {  
-    cout << "$ ";
-    string line;
-    getline(cin, line);
-    invalid_command(line);
+    read();
+    eval();
   }
   return 0;
 }
