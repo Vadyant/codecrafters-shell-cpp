@@ -2,6 +2,7 @@
 using namespace std;
 
 string line;
+bool active = true;
 
 void print(string line,string val){
   if(val=="invalid"){
@@ -15,6 +16,7 @@ void read(){
 }
 
 void eval(){
+  if(line=="exit") return;
   string v="invalid";
   print(line,v);
 }
@@ -25,7 +27,6 @@ int main() {
   cerr << std::unitbuf;
 
   // TODO: Uncomment the code below to pass the first stage
-  bool active = true;
   while (active) {  
     read();
     eval();
