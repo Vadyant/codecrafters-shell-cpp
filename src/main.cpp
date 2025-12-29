@@ -15,7 +15,8 @@ void read(){
 }
 
 void eval(){
-  print(line,"invalid");
+  string v="invalid";
+  print(line,v);
 }
 
 int main() {
