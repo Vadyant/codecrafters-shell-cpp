@@ -1,6 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+bool invalid_command(string line){
+  cout<<line<<": command not found"<<endl;
+}
+
 int main() {
   // Flush after every std::cout / std:cerr
   cout << std::unitbuf;
@@ -12,7 +16,7 @@ int main() {
     cout << "$ ";
     string line;
     getline(cin, line);
-    cout<<line<<": command not found"<<endl;
+    invalid_command(line);
   }
   return 0;
 }
