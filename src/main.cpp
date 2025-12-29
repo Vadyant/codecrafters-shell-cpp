@@ -16,7 +16,10 @@ void read(){
 }
 
 void eval(){
-  if(line=="exit") return;
+  if(line=="exit"){
+    active=false;
+    return;
+  }
   string v="invalid";
   print(line,v);
 }
