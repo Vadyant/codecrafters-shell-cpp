@@ -16,6 +16,7 @@ void print(int a,int b){
 }
 
 void read(){
+  word.clear();
   cout << "$ ";
   getline(cin,line);
   string temp="";
