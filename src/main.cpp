@@ -3,6 +3,7 @@ using namespace std;
 
 string line;
 bool active = true;
+vector<string> builtin={"echo","exit","type"};
 
 // void print(string line,string val){
 //   if(val=="invalid"){
@@ -28,16 +29,27 @@ void eval(){
   }
   word.push_back(temp);
   int len=word.size();
+  
   if(word[0]=="exit"){
     active=false;
     return;
   }
+  
   if(word[0]=="echo"){
     for(int i=1;i<len;i++)
     cout<<word[i]<<' ';
     cout<<endl;
     return;
   }
+  
+  if(word[0]=="type"){
+    auto it = find(builtin.begin(), builtin.end(), word[1]);
+    if(it != builtin.end()){
+      cout<<word[1]<<" is a shell builtin"<<endl;
+      return;
+    }
+  }
+  
   cout<<line<<": command not found"<<endl;
   
 }
