@@ -48,6 +48,10 @@ void eval(){
       cout<<word[1]<<" is a shell builtin"<<endl;
       return;
     }
+    for(int i=1;i<len;i++)
+    cout<<word[i]<<' ';
+    cout<<": not found"<<endl;
+    return;
   }
   
   cout<<line<<": command not found"<<endl;
