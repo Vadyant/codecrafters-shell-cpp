@@ -97,17 +97,20 @@ void eval() {
     }
   }
   // not builtin
-  int pid = fork();
-
-  if (pid == 0) {
-    execvp(argv[0], argv.data());
-    perror(argv[0]);   // only if execvp fails
-    exit(127);
-  } else if (pid > 0) {
-    waitpid(pid, nullptr, 0);
+  for(auto d:directory){
+    d=d+"/"+word[0];
+    if(access(d.c_str(),X_OK)==0){
+      int pid = fork();
+      if (pid==0){
+        execv(d.c_str(), argv.data()); 
+        perror("execvp"); exit(1);
+      }else if(pid>0){
+        wait(NULL);
+      } 
+      return;
+    }
   }
-
-
+  cout<<word[0]<<": command not found";
 }
 
 int main() {
