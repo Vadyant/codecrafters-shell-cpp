@@ -101,9 +101,7 @@ void eval() {
     perror("execvp");
     exit(1);
   }else if(pid>0){
-    waitpid(pid, nullptr, 0);
-  }else {
-    perror("fork");
+    wait(NULL);
   }
 }
 
