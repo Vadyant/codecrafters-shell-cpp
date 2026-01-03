@@ -74,7 +74,7 @@ void eval() {
       return;
     }
     for(auto d:directory){
-      d=d+"//"+word[1];
+      d=d+"/"+word[1];
       if(access(d.c_str(),X_OK)==0){
         cout<<word[1]<<" is "<<d<<endl;
         return;
