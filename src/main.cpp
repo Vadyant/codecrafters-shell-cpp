@@ -92,12 +92,7 @@ void eval() {
     return;
   }
 
-  for(auto d:directory){
-      d=d+"/"+word[0];
-      if(access(d.c_str(),X_OK)==0){
-        execvp(argv[0],argv.data());
-      }
-    }
+  execvp(argv[0],argv.data());
 
   cout << line << ": command not found" << endl;
 }
