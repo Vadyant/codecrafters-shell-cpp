@@ -7,6 +7,17 @@ vector<string> builtin = {"echo", "exit", "type"};
 vector<string> word;
 int len;
 string val;
+vector<string > directory;
+
+vector<string> dir(const char* p){
+  vector<string> d;
+  string word;
+  stringstream ss(p);
+  while(getline(ss,word,':')){
+    d.push_back(word);
+  }
+  return d;
+}
 
 void print(int a, int b) {
   if (a >= b) {
@@ -23,6 +34,8 @@ void read() {
   word.clear();
   cout << "$ ";
   getline(cin, line);
+
+  directory=dir(getenv("PATH"));
 
   string temp = "";
   for (char c : line) {
@@ -60,8 +73,14 @@ void eval() {
       cout << word[1] << " is a shell builtin" << endl;
       return;
     }
-    val = ": not found";
-    print(1, len);
+    for(auto d:directory){
+      d=d+"//"+word[1];
+      if(access(d.c_str(),X_OK)==0){
+        cout<<word[1]<<" is "<<d<<endl;
+        return;
+      }
+    }
+    cout<<word[1]<<": not found"<<endl;
     return;
   }
 
