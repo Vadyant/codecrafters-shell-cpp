@@ -53,8 +53,8 @@ void read() {
 
   len = word.size();
 
-  for(auto s:word){
-    argv.push_back(const_cast<char*>(s.c_str()));
+  for(auto &s:word){
+    argv.push_back(s.data());
   }
   argv.push_back(nullptr);
 }
