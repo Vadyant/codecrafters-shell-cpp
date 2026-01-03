@@ -84,7 +84,7 @@ void eval() {
       d=d+"/"+word[1];
       if(access(d.c_str(),X_OK)==0){
         if(fork()==0){
-          execv(d.c_str(),argv.data());
+          execvp(argv[0],argv.data());
         }else{
           wait(NULL);
           return;
