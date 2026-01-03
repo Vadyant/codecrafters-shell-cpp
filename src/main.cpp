@@ -105,7 +105,6 @@ void eval() {
   }else {
     perror("fork");
   }
-  cout << line << ": command not found" << endl;
 }
 
 int main() {
