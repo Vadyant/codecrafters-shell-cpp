@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
+#include <sys/wait.h>
 using namespace std;
 
 string line;
 bool active = true;
 vector<string> builtin = {"echo", "exit", "type"};
 vector<string> word;
+vector<char*> argv;
 int len;
 string val;
 vector<string > directory;
@@ -47,6 +49,11 @@ void read() {
   if (!temp.empty()) word.push_back(temp);
 
   len = word.size();
+
+  for(auto s:word){
+    argv.push_back(const_cast<char*>(s.c_str()));
+  }
+  argv.push_back(nullptr);
 }
 
 void eval() {
@@ -76,8 +83,12 @@ void eval() {
     for(auto d:directory){
       d=d+"/"+word[1];
       if(access(d.c_str(),X_OK)==0){
-        cout<<word[1]<<" is "<<d<<endl;
-        return;
+        if(fork()==0){
+          execv(d.c_str(),argv.data());
+        }else{
+          wait(NULL);
+          return;
+        }
       }
     }
     cout<<word[1]<<": not found"<<endl;
