@@ -93,7 +93,7 @@ void eval() {
   }
 
   for(auto d:directory){
-      d=d+"/"+word[1];
+      d=d+"/"+word[0];
       if(access(d.c_str(),X_OK)==0){
         if(fork()==0){
           execvp(argv[0],argv.data());
