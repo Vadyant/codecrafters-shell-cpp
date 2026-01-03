@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 #include <sys/wait.h> 
+#include <unistd.h>
+
 using namespace std;
 
 string line;
@@ -92,8 +94,17 @@ void eval() {
     return;
   }
 
-  execvp(argv[0],argv.data());
+  int pid = fork();
 
+  if (pid==0){
+    execvp(argv[0], argv.data());
+    perror("execvp");
+    exit(1);
+  }else if(pid>0){
+    waitpid(pid, nullptr, 0);
+  }else {
+    perror("fork");
+  }
   cout << line << ": command not found" << endl;
 }
 
