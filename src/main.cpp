@@ -62,47 +62,58 @@ void read() {
 void eval() {
   if (word.empty()) return;
 
-  if (word[0] == "exit") {
-    active = false;
-    return;
-  }
-
-  if (word[0] == "echo") {
-    val = "";
-    print(1, len);
-    return;
-  }
-
-  if (word[0] == "type") {
-    if (len < 2) {
-      cout << "type: missing argument" << endl;
+  if(find(builtin.begin(), builtin.end(), word[0])!=builtin.end()){
+    
+    if (word[0] == "exit") {
+      active = false;
       return;
     }
-    auto it = find(builtin.begin(), builtin.end(), word[1]);
-    if (it != builtin.end()) {
-      cout << word[1] << " is a shell builtin" << endl;
+  
+    if (word[0] == "echo") {
+      val = "";
+      print(1, len);
       return;
     }
-    for(auto d:directory){
-      d=d+"/"+word[1];
-      if(access(d.c_str(),X_OK)==0){
-        cout<<word[1]<<" is "<<d<<endl;
+  
+    if (word[0] == "type") {
+      if (len < 2) {
+        cout << "type: missing argument" << endl;
         return;
       }
+      auto it = find(builtin.begin(), builtin.end(), word[1]);
+      if (it != builtin.end()) {
+        cout << word[1] << " is a shell builtin" << endl;
+        return;
+      }
+      for(auto d:directory){
+        d=d+"/"+word[1];
+        if(access(d.c_str(),X_OK)==0){
+          cout<<word[1]<<" is "<<d<<endl;
+          return;
+        }
+      }
+      cout<<word[1]<<": not found"<<endl;
+      return;
     }
-    cout<<word[1]<<": not found"<<endl;
-    return;
+  }
+  // not builtin
+  for(auto d:directory){
+    d=d+"/"+word[0];
+    if(access(d.c_str(),X_OK)==0){
+
+      int pid = fork();
+    
+      if (pid==0){
+        execv(d.c_str(), argv.data());
+        perror("execvp");
+        exit(1);
+      }else if(pid>0){
+        wait(NULL);
+      }
+      return;
+    }
   }
 
-  int pid = fork();
-
-  if (pid==0){
-    execvp(argv[0], argv.data());
-    perror("execvp");
-    exit(1);
-  }else if(pid>0){
-    wait(NULL);
-  }
 }
 
 int main() {
