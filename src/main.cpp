@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <sys/wait.h>
+#include <sys/wait.h> 
 using namespace std;
 
 string line;
@@ -34,6 +34,7 @@ void print(int a, int b) {
 
 void read() {
   word.clear();
+  argv.clear();
   cout << "$ ";
   getline(cin, line);
 
@@ -83,17 +84,26 @@ void eval() {
     for(auto d:directory){
       d=d+"/"+word[1];
       if(access(d.c_str(),X_OK)==0){
+        cout<<word[1]<<" is "<<d<<endl;
+        return;
+      }
+    }
+    cout<<word[1]<<": not found"<<endl;
+    return;
+  }
+
+  for(auto d:directory){
+      d=d+"/"+word[1];
+      if(access(d.c_str(),X_OK)==0){
         if(fork()==0){
           execvp(argv[0],argv.data());
         }else{
           wait(NULL);
           return;
         }
+        return;
       }
     }
-    cout<<word[1]<<": not found"<<endl;
-    return;
-  }
 
   cout << line << ": command not found" << endl;
 }
