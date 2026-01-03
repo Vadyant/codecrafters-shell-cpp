@@ -74,6 +74,17 @@ void eval() {
       print(1, len);
       return;
     }
+
+    if(word[0]=="pwd"){
+      int pid = fork();
+      if (pid==0){
+        execvp("pwd", argv.data()); 
+        perror("execvp"); exit(1);
+      }else if(pid>0){
+        wait(NULL);
+      } 
+      return;
+    }
   
     if (word[0] == "type") {
       if (len < 2) {
