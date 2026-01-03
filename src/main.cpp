@@ -80,6 +80,7 @@ void eval() {
       if(getcwd(cwd,sizeof(cwd))){
         cout<<cwd<<endl;
       }
+      return;
     }
   
     if (word[0] == "type") {
