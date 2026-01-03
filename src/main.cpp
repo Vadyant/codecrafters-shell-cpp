@@ -110,7 +110,7 @@ void eval() {
       return;
     }
   }
-  cout<<word[0]<<": command not found";
+  cout<<word[0]<<": command not found"<<endl;
 }
 
 int main() {
