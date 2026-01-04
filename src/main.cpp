@@ -42,9 +42,13 @@ void read() {
 
   directory=dir(getenv("PATH"));
 
+  bool quote=false;
   string temp = "";
   for (char c : line) {
-    if (c == ' ') {
+    if(c=='\''){
+      quote=~quote;
+    }
+    else if (c == ' '&&(!quote)) {
       if (!temp.empty()) word.push_back(temp);
       temp = "";
     } else temp += c;
@@ -84,15 +88,18 @@ void eval() {
     }
 
     if(word[0]=="cd"){
-      if(strcmp(argv[1],"~")==0){
+
+      if(argv[1]==nullptr||strcmp(argv[1],"~")==0){ // cd ~
         char* HOME= getenv("HOME");
         if(chdir(HOME)==0) return;
         else cout<<"cd: "<<argv[1]<<": No such file or directory"<<endl;
         return;
       }
+
       if(chdir(argv[1])==0) return;
       else cout<<"cd: "<<argv[1]<<": No such file or directory"<<endl;
       return;
+
     }
   
     if (word[0] == "type") {
