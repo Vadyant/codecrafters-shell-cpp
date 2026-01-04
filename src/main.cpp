@@ -84,7 +84,7 @@ void eval() {
     }
 
     if(word[0]=="cd"){
-      if(argv[1]=="~"){
+      if(strcmp(argv[1],"~")==0){
         char* HOME= getenv("HOME");
         if(chdir(HOME)==0) return;
         else cout<<"cd: "<<argv[1]<<": No such file or directory"<<endl;
