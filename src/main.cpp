@@ -46,7 +46,7 @@ void read() {
   string temp = "";
   for (char c : line) {
     if(c=='\''){
-      quote=~quote;
+      quote=!quote;
     }
     else if (c == ' '&&(!quote)) {
       if (!temp.empty()) word.push_back(temp);
