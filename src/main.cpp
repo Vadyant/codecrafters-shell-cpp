@@ -45,15 +45,16 @@ void read() {
   bool single_quote=false;
   bool double_quote=false;
   string temp = "";
-  for (char c : line) {
+  for (int i=0;i,line.size();i++) {
+    char c=line[i];
     if(c=='\\'){
       if(single_quote){
         temp+=c;
         continue;
       }
       else{
-        (c)++;
-        temp+=c;
+        i++;
+        temp+=line[i++];
         continue;
       }
     }
