@@ -6,7 +6,7 @@ using namespace std;
 
 string line;
 bool active = true;
-vector<string> builtin = {"echo", "exit", "type","pwd"};
+vector<string> builtin = {"echo", "exit", "type","pwd","cd"};
 vector<string> word;
 vector<char*> argv;
 int len;
@@ -81,6 +81,11 @@ void eval() {
         cout<<cwd<<endl;
       }
       return;
+    }
+
+    if(argv[0]=="cd"){
+      if(chdir(argv[1])==0) return;
+      else cout<<"cd: "<<argv[1]<<": No such file or directory"<<endl;
     }
   
     if (word[0] == "type") {
