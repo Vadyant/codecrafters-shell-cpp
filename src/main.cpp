@@ -52,7 +52,7 @@ void read() {
     else if(c=='\''&&(!double_quote)){
       single_quote=!single_quote;
     }
-    else if (c == ' '&&(!single_quote|!double_quote)) {
+    else if (c == ' '&&(!single_quote&&!double_quote)) {
       if (!temp.empty()) word.push_back(temp);
       temp = "";
     } else temp += c;
