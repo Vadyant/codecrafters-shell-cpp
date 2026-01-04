@@ -54,7 +54,7 @@ void read() {
       }
       else{
         i++;
-        temp+=line[i++];
+        temp+=line[i];
         continue;
       }
     }
