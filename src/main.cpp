@@ -108,6 +108,7 @@ void eval() {
       cout<<word[1]<<": not found"<<endl;
       return;
     }
+    cout<<"not a builting func"<<endl;
   }
   // not builtin
   for(auto d:directory){
