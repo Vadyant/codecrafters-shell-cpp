@@ -83,7 +83,7 @@ void eval() {
       return;
     }
 
-    if(argv[0]=="cd"){
+    if(word[0]=="cd"){
       if(chdir(argv[1])==0) return;
       else cout<<"cd: "<<argv[1]<<": No such file or directory"<<endl;
     }
