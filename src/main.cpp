@@ -6,7 +6,7 @@ using namespace std;
 
 string line;
 bool active = true;
-vector<string> builtin = {"echo", "exit", "type","pwd","cd"};
+vector<string> builtin = {"echo", "exit","type","pwd","cd"};
 vector<string> word;
 vector<char*> argv;
 int len;
