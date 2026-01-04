@@ -59,7 +59,7 @@ void read() {
       }
     }
 
-    if(c=='"'){
+    else if(c=='"'){
       double_quote=!double_quote;
     }
 
