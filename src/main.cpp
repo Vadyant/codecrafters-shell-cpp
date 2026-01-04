@@ -42,13 +42,17 @@ void read() {
 
   directory=dir(getenv("PATH"));
 
-  bool quote=false;
+  bool single_quote=false;
+  bool double_quote=false;
   string temp = "";
   for (char c : line) {
-    if(c=='\''){
-      quote=!quote;
+    if(c=='"'){
+      double_quote=!double_quote;
     }
-    else if (c == ' '&&(!quote)) {
+    else if(c=='\''&&(!double_quote)){
+      single_quote=!single_quote;
+    }
+    else if (c == ' '&&(!single_quote||!double_quote)) {
       if (!temp.empty()) word.push_back(temp);
       temp = "";
     } else temp += c;
