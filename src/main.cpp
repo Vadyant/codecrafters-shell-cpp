@@ -45,7 +45,7 @@ void read() {
   bool single_quote=false;
   bool double_quote=false;
   string temp = "";
-  for (int i=0;i,line.size();i++) {
+  for (int i=0;i<line.size();i++) {
     char c=line[i];
     if(c=='\\'){
       if(single_quote){
