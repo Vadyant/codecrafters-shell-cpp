@@ -51,6 +51,11 @@ void read() {
       if(single_quote){
         temp+=c;
         continue;
+      }else if(double_quote){
+        if(line[i+1]=='"'||line[i+1]=='\\'){
+          i++;
+          temp+=line[i];
+        }
       }
       else{
         i++;
