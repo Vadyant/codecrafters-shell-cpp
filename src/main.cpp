@@ -55,7 +55,7 @@ void read() {
         if(line[i+1]=='"'||line[i+1]=='\\'){
           i++;
           temp+=line[i];
-        }
+        }else temp+=c;
       }
       else{
         i++;
